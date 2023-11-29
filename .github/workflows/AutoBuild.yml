@@ -20,7 +20,7 @@ on:
       no_pages:
         description: 'Donot deploy pages'
         required: true
-        default: false
+        default: true
         type: boolean
       export_dl:
         description: 'Export DL'
