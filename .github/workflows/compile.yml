@@ -39,7 +39,7 @@ on:
 
 env:
 # 使用 GPG 签名 Packages (非必要)
-  GPG_SIGN: true
+  GPG_SIGN: false
 # Cache Libraries
   CACHE_DOWNLOAD: true
 # 删除无用文件以增加编译空间
@@ -115,8 +115,8 @@ jobs:
           cat $GITHUB_WORKSPACE/keys/usign/${USIGN_ID}.pub >> $GITHUB_ENV
           echo "$EOF" >> $GITHUB_ENV
           # gpg
-          gpg --batch --pinentry-mode=loopback --yes --passphrase "$(echo -n "${GPG_PW}")" --import <(echo "${GPG_KEY}")
-          echo "$(sed 's|\s||g' "$GITHUB_WORKSPACE/keys/gpg/${GPG_ID}.finger"):6:" | gpg --import-ownertrust
+          #gpg --batch --pinentry-mode=loopback --yes --passphrase "$(echo -n "${GPG_PW}")" --import <(echo "${GPG_KEY}")
+          #echo "$(sed 's|\s||g' "$GITHUB_WORKSPACE/keys/gpg/${GPG_ID}.finger"):6:" | gpg --import-ownertrust
 
       - name: Cache DL dependencies
         if: env.CACHE_DOWNLOAD == 'true' && (inputs.build_mode == 0 || inputs.build_mode == 'build_pkgs_and_imgs' || inputs.build_mode == 'build_pkgs') && !cancelled()
